@@ -12,10 +12,17 @@ public class IntroUI : MonoBehaviour
 {
     public GameObject gameManager;
     public TMP_InputField userName;
+    public TMP_Text highScoreText;
 
     public void Start()
     {
+        GameManager.Instance.LoadScore();
         userName.text = GameManager.Instance.userName;
+        if(GameManager.Instance.score > 0)
+        {
+            highScoreText.text = "Current High Score belongs to " + GameManager.Instance.topUserName + " with a score of " + GameManager.Instance.score;
+        }
+     
     }
 
     public void StartGame()

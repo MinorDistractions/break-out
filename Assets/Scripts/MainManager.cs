@@ -12,6 +12,7 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public Text userNameText;
+    public Text highScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -38,6 +39,10 @@ public class MainManager : MonoBehaviour
         }
 
         userNameText.text = GameManager.Instance.userName;
+        if (GameManager.Instance.score > 0)
+        {
+            highScoreText.text = "High Score: " + GameManager.Instance.topUserName + " with a score of " + GameManager.Instance.score;
+        }
 
     }
 
@@ -60,6 +65,10 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                if(GameManager.Instance.score < m_Points)
+                {
+                    GameManager.Instance.SaveScore(GameManager.Instance.userName, m_Points);
+                }
                 SceneManager.LoadScene(0);
             }
         }
